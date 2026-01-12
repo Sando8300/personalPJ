@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc175b7258f292439757e1cbf5b46bf, type: 3}
+  m_Name: Mp7a1
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  itemid: 1
+  itemDetail_ID: 1000
+  itemName: Mp7a1
+  itemIcon: {fileID: 21300000, guid: 583b6ad9835c0034b9e38331c4d4dc88, type: 3}
+  itemimg: {fileID: 21300000, guid: 583b6ad9835c0034b9e38331c4d4dc88, type: 3}
+  itemtype: 0
+  itemDesc: "SyncTec\uC758 \uAE30\uBCF8 \uC9C0\uAE09 \uC7A5\uBE44\uC774\uB2E4. \uC900\uC218\uD55C
+    \uD654\uB825\uC744 \uC790\uB791\uD55C\uB2E4."
+  itemMaxdur: 100
+  isStack: 0
+  damage: 25
+  fireRate: 1300
+  magazineSize: 30
+  weaponPrefab: {fileID: 8736313806434939227, guid: 6a25c944db930074b969e81f99728da1, type: 3}
+  offset: {x: 0, y: -1.59, z: 0}

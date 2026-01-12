@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: New Armor
+  m_EditorClassIdentifier: Assembly-CSharp::ArmorData
+  itemid: 2
+  itemDetail_ID: 2000
+  itemName: "\uC77C\uBC18 \uBC29\uC5B4\uAD6C"
+  itemIcon: {fileID: 21300000, guid: c101b25c8f892254b921de0174ff1642, type: 3}
+  itemimg: {fileID: 21300000, guid: c101b25c8f892254b921de0174ff1642, type: 3}
+  itemtype: 1
+  itemDesc: "\uC77C\uBC18\uC801\uC778 \uBC29\uC5B4\uAD6C"
+  itemMaxdur: 100
+  isStack: 0
+  resist: 10
