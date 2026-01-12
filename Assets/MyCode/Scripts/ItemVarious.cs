@@ -13,6 +13,7 @@ public class WeaponData : ItemData
     public int magazineSize;
     public GameObject weaponPrefab;
     public Vector3 offset;
+    public int[] usedBulletInfoArray;
     
 }
 

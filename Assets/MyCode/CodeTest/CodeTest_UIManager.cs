@@ -16,10 +16,10 @@ public class CodeTest_UIManager : MonoBehaviour
     float timer;
     public float fadeSpeed = 1;
     public TextMeshProUGUI statusText;
-
     public TextMeshProUGUI ammoText;
-
     public Slider hpSlider;
+
+    public Image UIimage;
     void Start()
     {
         // inventory.InventoryOnChanged += UpdateUI; 

@@ -41,17 +41,29 @@ public class Gun : MonoBehaviour
 
     public GameManagerScript gameManager;
 
+    CodeTest_Inventory exist;
     private void Awake()
     {
-
+        gameManager = GameManagerScript.instance;
 
     }
     void Start()
     {
+        
+        for (int i = 0; i < PlayerCombat.Instance.currentWeapon.usedBulletInfoArray.Length; i++)
+        {
+            if (GameManagerScript.instance.inventoryManager.inventory.ContainsKey(PlayerCombat.Instance.currentWeapon.usedBulletInfoArray[i].ToString()))
+            {
+                exist = GameManagerScript.instance.inventoryManager.inventory[PlayerCombat.Instance.currentWeapon.uniqueId];
+            }
+            else
+                exist = null;                
+        }
+        
 
-        maxAmmo = 30;
-      //  var exist = gameManager.inventoryManager.inventory.ContainsKey(PlayerCombat.Instance.currentWeapon.)총알찾기 필요.
-      /*  if (exist == null)
+
+        maxAmmo = PlayerCombat.Instance.currentWeapon.magazineSize;
+        if (exist == null)
         {
             gameManager.uiManager.statusText.text = "I dont have any ammo, have to find one.";
             StartCoroutine(gameManager.uiManager.TextBlink());
@@ -64,8 +76,8 @@ public class Gun : MonoBehaviour
             if (exist.count >= maxAmmo)
                 currentAmmo = exist.count / maxAmmo;
             else
-                currentAmmo = exist.count;
-        }*/
+               currentAmmo = exist.count;
+        }
 
         Mag = new GameObject[maxAmmo];
         for (int i = 0; i < maxAmmo; i++)

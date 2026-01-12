@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   itemid: 1
   itemDetail_ID: 1000
+  uniqueId: 
   itemName: Mp7a1
   itemIcon: {fileID: 21300000, guid: 583b6ad9835c0034b9e38331c4d4dc88, type: 3}
   itemimg: {fileID: 21300000, guid: 583b6ad9835c0034b9e38331c4d4dc88, type: 3}
@@ -27,3 +28,4 @@ MonoBehaviour:
   magazineSize: 30
   weaponPrefab: {fileID: 8736313806434939227, guid: 6a25c944db930074b969e81f99728da1, type: 3}
   offset: {x: 0, y: -1.59, z: 0}
+  usedBulletInfoArray: b80b0000b90b0000ba0b0000

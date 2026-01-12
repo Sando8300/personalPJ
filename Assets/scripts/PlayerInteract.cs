@@ -13,6 +13,11 @@ public class PlayerInteract : MonoBehaviour
     public AudioClip openSound;
     public AudioSource source;
 
+
+    private void Awake()
+    {
+        playerinteractorUI = GameManagerScript.instance.uiManager.UIimage.GetComponent<Image>();
+    }
     private void Update()
     {if (!isLoot) return;
        if(Input.GetKeyDown(KeyCode.E))

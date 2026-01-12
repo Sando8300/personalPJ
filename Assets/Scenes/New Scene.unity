@@ -7715,6 +7715,7 @@ MonoBehaviour:
   statusText: {fileID: 1089003676}
   ammoText: {fileID: 2017980312}
   hpSlider: {fileID: 459278605}
+  UIimage: {fileID: 892949617}
   slotprefabs: {fileID: 7237459293442525366, guid: 97b3adf673c9a2c47ba5be0c61341377, type: 3}
   slotparent: {fileID: 1947095584}
 --- !u!114 &756446023
@@ -50627,7 +50628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0018435784, y: 0.0061583435}
+  m_AnchoredPosition: {x: 0.0020035706, y: 0.0061583435}
   m_SizeDelta: {x: 0, y: 500}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1754283598624210745
@@ -104026,7 +104027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.003681864, y: 0.013417111}
+  m_AnchoredPosition: {x: -0.0036369099, y: 0.013584816}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!4 &4070226417441697510
@@ -196885,7 +196886,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4059433260142767828}
   m_HandleRect: {fileID: 12342520504291182}
   m_Direction: 2
-  m_Value: 0.64453125
+  m_Value: 0.61328125
   m_Size: 0.9999844
   m_NumberOfSteps: 0
   m_OnValueChanged:
