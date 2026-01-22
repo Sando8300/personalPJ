@@ -96,9 +96,9 @@ public class CodeTest_InventoryManager : MonoBehaviour
             {
                 //inventory[key].durability -= 1;
 
-                if (inventory[key].durability <= 0)
+              /*  if (inventory[key].durability <= 0)
                 {
-                    if (inventory[key].itemid != 2 || inventory[key].count <= 1)
+                    if (inventory[key].count <= 1)
                     {
                         inventory.Remove(key);
                     }
@@ -107,7 +107,7 @@ public class CodeTest_InventoryManager : MonoBehaviour
                         inventory[key].count--;
                         inventory[key].durability = inventory[key].max_Durability;
                     }
-                }
+                }*/
                 if (inventory[key].count <= 0)
                 {
                     inventory.Remove(key);
@@ -118,20 +118,7 @@ public class CodeTest_InventoryManager : MonoBehaviour
         }
     }
 
-    public void Equipitem(string id)
-    {
-        equipId = id;
-        /* foreach (var item in inventory)
-         {*/
-        /* if (item.Value.itemDetail_Id.ToString() == equipId )
-         {
-             item.Value.durability -= 20;
-             InventoryOnChanged?.Invoke(inventory);
-             return;
-         }*/
-
-    }
-
+  
     public void ReduceDur()
     {
         foreach (var item in inventory)

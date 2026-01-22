@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -8,40 +10,94 @@ public class PlayerCombat : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        equipmentInfo = new Dictionary<string, string>();
     }
 
-    [Header("상태 정보")]
-    public bool isEquipped = false; // 무기 장착 여부
-    public WeaponData currentWeapon; // 현재 낀 무기 데이터
+    public Dictionary<string, string> equipmentInfo;
+
+    [Header("무기 상태 정보")]
+    public CodeTest_Inventory currentWeaponitem; // 현재 장착한 무기 인벤정보
+    public WeaponData weaponData; // 현재 장착한 무기 SO데이터
     GameObject currentPrefab; // 현재 사용 중인 무기 프리팹
     public Transform cameraPoint;
 
+    [Header("방어구 상태 정보")]
+    public CodeTest_Inventory currentArmoritem; // 현재 장착한 방어구 인벤정보
+    public ArmorData armorData; // 현재 장착한 방어구 SO데이터
+
+
+
     // 무기 장착 함수
-    public void EquipWeapon(string uniqueid, WeaponData newWeapon)
+    public void EquipWeapon(string uniqueid, CodeTest_Inventory weapon)
     {
         if (!GameManagerScript.instance.inventoryManager.inventory.ContainsKey(uniqueid))
         {
-            Debug.Log("장착할 아이템이 없습니다.");
+            Debug.Log("장착할 무기가 없습니다.");
             return;
         }
-        currentWeapon = newWeapon;
-        isEquipped = true;
+        currentWeaponitem = GameManagerScript.instance.inventoryManager.inventory[weapon.uniqueId];
+        weaponData = GameManagerScript.instance.inventoryManager.inventory[currentWeaponitem.uniqueId].itemDataSO as WeaponData;
 
-        if (currentWeapon != null)
+        if (currentWeaponitem != null)
             Destroy(currentPrefab);
-        var gunprefab= Instantiate(currentWeapon.weaponPrefab, cameraPoint);
-        
-        GetComponent<PlayerGunController>().gun = gunprefab.GetComponent<Gun>();
+        currentPrefab = Instantiate(weaponData.weaponPrefab, cameraPoint);
+        currentWeaponitem.isEquipped = true;
+        var effect = ItemEffectFactory.GetEffect(weaponData.itemtype);
+        effect?.Apply(currentWeaponitem);
 
-        Debug.Log($"{newWeapon.itemName}을(를) 손에 들었습니다!");
+        GetComponent<PlayerGunController>().gun = currentPrefab.GetComponent<Gun>();
+        GetComponent<FPplayer>().fpsAnimator = currentPrefab.GetComponent<Animator>();
+        equipmentInfo.Add(currentWeaponitem.itemid.ToString(), currentWeaponitem.uniqueId);
+        Debug.Log($"{GameManagerScript.instance.inventoryManager.inventory[currentWeaponitem.uniqueId].name}을(를) 손에 들었습니다!");
+
 
     }
 
     // 무기 해제 함수
-    public void UnEquipWeapon()
+    public void UnEquipWeapon(int currentAmmo)
     {
-        isEquipped = false;
-        currentWeapon = null;
+        currentWeaponitem.currentMagCount = currentAmmo;
+        currentWeaponitem.isEquipped = false;
+        var effect = ItemEffectFactory.GetEffect(weaponData.itemtype);
+        effect?.Remove(currentWeaponitem);
+        Destroy(currentPrefab);
+        GameManagerScript.instance.uiManager.ammoText.text = "";
+        GameManagerScript.instance.uiManager.ammoTextRefresh(0);
+        equipmentInfo.Remove(currentWeaponitem.itemid.ToString());
         Debug.Log("무기를 집어넣었습니다.");
     }
+
+    public void EquipArmor(string uniqueid, CodeTest_Inventory armor)
+    {
+        if (!GameManagerScript.instance.inventoryManager.inventory.ContainsKey(uniqueid))
+        {
+            Debug.Log("장착할 방어구가 없습니다.");
+            return;
+        }
+        currentArmoritem = GameManagerScript.instance.inventoryManager.inventory[armor.uniqueId];
+        armorData = GameManagerScript.instance.inventoryManager.inventory[currentArmoritem.uniqueId].itemDataSO as ArmorData;
+        currentArmoritem.isEquipped = true;
+        equipmentInfo.Add(currentArmoritem.itemid.ToString(), currentArmoritem.uniqueId);
+        var effect = ItemEffectFactory.GetEffect(currentArmoritem.itemDataSO.itemtype);
+        effect?.Apply(currentArmoritem);
+
+        Debug.Log($"{GameManagerScript.instance.inventoryManager.inventory[currentArmoritem.uniqueId].name} 장착했습니다.");
+
+
+    }
+
+    // 무기 해제 함수
+    public void UnEquipArmor()
+    {
+
+        currentArmoritem.isEquipped = false;
+        equipmentInfo.Remove(currentArmoritem.itemid.ToString());
+        var effect = ItemEffectFactory.GetEffect(currentArmoritem.itemDataSO.itemtype);
+        effect?.Remove(currentArmoritem);
+        Debug.Log("방어구를 벗었습니다.");
+    }
+
 }
+   
+
+

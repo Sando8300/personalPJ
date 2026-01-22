@@ -7,10 +7,14 @@ public class GameManagerScript : MonoBehaviour
     public static GameManagerScript instance;
     public CodeTest_InventoryManager inventoryManager;
     public CodeTest_UIManager uiManager;
+    public InventoryUI invenUI;
     public AudioManager audioManager;
+    public AmmoPoolingMG ammoPoolingMG;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float currentHp;
     public int maxhp;
+    public int currentArmor = 0;
     public int damage = 0;
     public float hpRadio;
     public HpHand3DUI hpHand3DUI;
@@ -24,7 +28,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] bool gamestart = false;
 
     // public GameObject[] subjects;
-    int maxAmmo = 30;
+    
 
 
     private void Awake()

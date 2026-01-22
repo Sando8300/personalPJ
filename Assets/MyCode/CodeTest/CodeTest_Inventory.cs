@@ -14,11 +14,15 @@ public class CodeTest_Inventory
     public int count;
     public string desc;
     public bool isStack;
+    public int currentMagCount;
+    public bool isEquipped;
     public ItemData itemDataSO;
+    
 
 
     public CodeTest_Inventory(ItemData source, int addCount =0)
     {
+        // ... 초기화 ...
         img = source.itemimg;
         isStack = source.isStack;
         itemid = source.itemid;
@@ -31,5 +35,17 @@ public class CodeTest_Inventory
         count = 1;
         itemDataSO = source;
         
-}
+
+        // 처음 얻었을 때는 꽉 채워주기 (SO에서 최대 장탄수 가져옴)
+        isEquipped = false; // 처음 얻었을 땐 당연히 장착 안 된 상태
+
+        if (source is WeaponData weapon)
+        {
+            currentMagCount = 0;
+        }
+
+
+
+    }
+  
 }

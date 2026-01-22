@@ -46,8 +46,9 @@ public class PlayerGunController : MonoBehaviour
 
     void OnFirePerformed(InputAction.CallbackContext ctx)
     {
-        if (gun != null)
-            gun.FireShot();
+       /* if (gun != null)
+           
+           //gun.FireShot();*/
     }
     void OnReloadPerformed(InputAction.CallbackContext ctx)
     {

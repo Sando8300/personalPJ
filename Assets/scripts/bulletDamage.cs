@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class bulletDamage : MonoBehaviour
 {
+
     public GameObject Damager;
-    float damage = 0;
+    public float damage = 0;
 
     public bool isDamaged = false;
     float dmgMul = 1;
@@ -22,9 +23,9 @@ public class bulletDamage : MonoBehaviour
 
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        //damage = 
+        //damage =
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -45,7 +46,7 @@ public class bulletDamage : MonoBehaviour
                 dmgMul = customHitBox.HitandAnim();
             }
             Quaternion rotation = Quaternion.LookRotation(hitNormal);
-            collision.gameObject.GetComponentInParent<EnemySimpleDamaged>().TakeDamage(damage * dmgMul, Damager);
+            collision.gameObject.GetComponentInParent<EnemySimpleDamaged>().TakeDamage(damage * dmgMul);
             GameObject bloodfx = Instantiate(bloodFxPrefabs, hitPoint, rotation);
             AudioSource.PlayClipAtPoint(audioClip, hitPoint);
             Debug.Log("데미지입힘.");

@@ -8,8 +8,8 @@ public static class ItemEffectFactory
         {
             Itemtype.Consume => new ConsumeEffect(),
             Itemtype.Weapon => new WeaponEffect(),
+            Itemtype.Armor => new ArmorEffect(),
             _ => null
-
         };
     }
 }

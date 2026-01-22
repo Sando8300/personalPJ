@@ -19,10 +19,9 @@ public class EnemySimpleDamaged : MonoBehaviour
         renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         propblock = new MaterialPropertyBlock();
     }
-    public void TakeDamage(float damage, GameObject damager)
+    public void TakeDamage(float damage)
     {
-        if (damager.GetComponent<bulletDamage>())
-            damage += damage;
+       
         currentHp -= damage;
       
         if (currentHp < 50)
@@ -34,7 +33,7 @@ public class EnemySimpleDamaged : MonoBehaviour
             
             if (currentHp <= 0)
             {
-                transform.position += Vector3.up * 0.1f;           
+                transform.position += Vector3.up * 0.3f;           
                 StartCoroutine(CallRegdoll());               
             }
 
@@ -65,7 +64,7 @@ public class EnemySimpleDamaged : MonoBehaviour
 
     IEnumerator CallRegdoll()
     {
-        //yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0.3f);
         GetComponent<SubjectAI>().RagdollStart();
         yield return null;
     }

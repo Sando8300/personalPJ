@@ -1,25 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: New Misc
-  m_EditorClassIdentifier: Assembly-CSharp::MiscData
-  itemid: 5
-  itemDetail_ID: 5000
-  itemName: "\uAC15\uCCA0"
-  itemIcon: {fileID: 21300000, guid: 0e3f55561a44fbd4c93b4b07a5248251, type: 3}
-  itemimg: {fileID: 21300000, guid: 0e3f55561a44fbd4c93b4b07a5248251, type: 3}
-  itemtype: 2
-  itemDesc: "\uC77C\uBC18\uC801\uC778 \uC7AC\uB8CC\uC774\uB2E4."
-  itemMaxdur: 100
-  isStack: 1
-  tier: 1
-  price: 100
+version https://git-lfs.github.com/spec/v1
+oid sha256:7df106c3e6017ff6bca6c99f60f3a4e09f12cc6a7f3191ffd682cac58aa39600
+size 763

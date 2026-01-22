@@ -7,9 +7,7 @@ public class Gun : MonoBehaviour
 {
 
     public UnityEngine.InputSystem.InputActionProperty fireAction;
-    Transform spentCasePos;
     public Transform firePos;
-    public GameObject bulletprefab, casingprefab;
     public GameObject[] Mag;
     bool isEmpty = false;
     bool isfire = false;
@@ -38,6 +36,7 @@ public class Gun : MonoBehaviour
     float nextFireTime = 0f;
     public int shotSpd = 50;
     Rigidbody rb;
+    int remainammo;
 
     public GameManagerScript gameManager;
 
@@ -49,21 +48,25 @@ public class Gun : MonoBehaviour
     }
     void Start()
     {
-        
-        for (int i = 0; i < PlayerCombat.Instance.currentWeapon.usedBulletInfoArray.Length; i++)
+
+        for (int i = 0; i < PlayerCombat.Instance.weaponData.usedBulletInfoArray.Length; i++)
         {
-            if (GameManagerScript.instance.inventoryManager.inventory.ContainsKey(PlayerCombat.Instance.currentWeapon.usedBulletInfoArray[i].ToString()))
+            if (GameManagerScript.instance.inventoryManager.inventory.ContainsKey(PlayerCombat.Instance.weaponData.usedBulletInfoArray[i].ToString()))
             {
-                exist = GameManagerScript.instance.inventoryManager.inventory[PlayerCombat.Instance.currentWeapon.uniqueId];
+                exist = GameManagerScript.instance.inventoryManager.inventory[PlayerCombat.Instance.weaponData.usedBulletInfoArray[i].ToString()];
+                break;
             }
             else
-                exist = null;                
+            { 
+                exist = null;
+                isEmpty = true;
+            }
         }
-        
 
 
-        maxAmmo = PlayerCombat.Instance.currentWeapon.magazineSize;
-        if (exist == null)
+        remainammo = GameManagerScript.instance.inventoryManager.inventory[PlayerCombat.Instance.currentWeaponitem.uniqueId].currentMagCount;
+        maxAmmo = PlayerCombat.Instance.weaponData.magazineSize;
+        if (exist == null && remainammo == 0)
         {
             gameManager.uiManager.statusText.text = "I dont have any ammo, have to find one.";
             StartCoroutine(gameManager.uiManager.TextBlink());
@@ -73,18 +76,20 @@ public class Gun : MonoBehaviour
 
         if (exist != null)
         {
-            if (exist.count >= maxAmmo)
-                currentAmmo = exist.count / maxAmmo;
+            if (remainammo > 0)
+            {
+                currentAmmo = remainammo;
+                Debug.Log("남은 총알 인식했고 적용했음");
+            }
             else
-               currentAmmo = exist.count;
+            {
+                Debug.Log("남은 총알 인식x");
+                currentAmmo = 0;
+                isEmpty = true;
+            }
         }
 
-        Mag = new GameObject[maxAmmo];
-        for (int i = 0; i < maxAmmo; i++)
-        {
-            Mag[i] = Instantiate(bulletprefab, firePos.position, firePos.rotation);
-            Mag[i].SetActive(false);
-        }
+        Mag = GameManagerScript.instance.ammoPoolingMG.Mag;
 
         StartCoroutine(gameManager.uiManager.ammoTextRefresh(currentAmmo));
 
@@ -94,7 +99,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
 
-        if (isTriggerHeld == true && Time.time > nextFireTime && !isEmpty && isAutomatic )
+        if (isTriggerHeld == true && Time.time > nextFireTime && !isEmpty && isAutomatic)
         {
             nextFireTime = Time.time + fireRate;
             FireShot();
@@ -102,6 +107,12 @@ public class Gun : MonoBehaviour
     }
     public Coroutine reload;
     bool isReload = false;
+
+
+    public void SetDamage(GameObject bulletobj)
+    {
+        bulletobj.GetComponent<bulletDamage>().damage = PlayerCombat.Instance.weaponData.damage;
+    }
     public void FireShot()
     {
         //딸깍소리출력
@@ -111,8 +122,10 @@ public class Gun : MonoBehaviour
             return;
         }
         int fireIndex = currentAmmo - 1;
+
         isfire = true;
         Mag[fireIndex].SetActive(true);
+        SetDamage(Mag[fireIndex]);
         Mag[fireIndex].transform.position = firePos.position;
         Mag[fireIndex].transform.rotation = firePos.rotation;
         rb = Mag[fireIndex].GetComponent<Rigidbody>();
@@ -132,14 +145,12 @@ public class Gun : MonoBehaviour
         if (isTriggerHeld) loopSFX.Play();
         StartCoroutine(Firerate(fireIndex));
         currentAmmo--;
+        GameManagerScript.instance.inventoryManager.inventory[PlayerCombat.Instance.currentWeaponitem.uniqueId].currentMagCount = currentAmmo;
         StartCoroutine(gameManager.uiManager.ammoTextRefresh(currentAmmo));
         if (currentAmmo == 0)
         {
-
-
-
+            GameManagerScript.instance.inventoryManager.inventory[PlayerCombat.Instance.currentWeaponitem.uniqueId].currentMagCount = currentAmmo;
             isEmpty = true;
-
             //장전로직 추가예정
         }
 

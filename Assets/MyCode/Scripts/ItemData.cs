@@ -7,13 +7,12 @@ public enum Itemtype
 {
     Weapon, Armor, Ammo, Consume, Misc
 }
-[CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]
-public class ItemData : ScriptableObject
+
+public abstract class ItemData : ScriptableObject
 {
     [Header("CommonItemInfo")]
     public int itemid;
     public int itemDetail_ID;
-    public string uniqueId;
     public string itemName;
     public Sprite itemIcon;
     public Sprite itemimg;
