@@ -24,9 +24,16 @@ public class PreviewSlot : MonoBehaviour
     {
         previewData = privateItem;
         if (previewData.type == "Weapon")
+        {
             PlayerCombat.Instance.currentWeaponitem = previewData;
+            Debug.Log(previewData.uniqueId);
+        }
         if (previewData.type == "Armor")
+        {
             PlayerCombat.Instance.currentArmoritem = previewData;
+            Debug.Log(previewData.uniqueId);
+        }
+
         img.sprite = privateItem.img;
         itemnameText.text = privateItem.name;
         StringBuilder sb = new StringBuilder();
@@ -44,18 +51,18 @@ public class PreviewSlot : MonoBehaviour
 
         //장비 장착
         equipBtn.onClick.RemoveAllListeners();
-      
+
         if (previewData.type == "Weapon" && !PlayerCombat.Instance.currentWeaponitem.isEquipped)
             equipBtn.onClick.AddListener(() => { PlayerCombat.Instance.EquipWeapon(previewData.uniqueId, previewData); });
         else if (previewData.type == "Armor" && !PlayerCombat.Instance.currentArmoritem.isEquipped)
             equipBtn.onClick.AddListener(() => { PlayerCombat.Instance.EquipArmor(previewData.uniqueId, previewData); });
-        
+
         //장비창 새로고침
         equipBtn.onClick.AddListener(() => { GameManagerScript.instance.invenUI.LoadOut(previewData.uniqueId, previewData.type); });
 
         //장비 해제
         unEquipBtn.onClick.RemoveAllListeners();
-        
+
 
         if (previewData.type == "Weapon" && PlayerCombat.Instance.currentWeaponitem.isEquipped)
         {

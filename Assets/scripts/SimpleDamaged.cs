@@ -7,42 +7,49 @@ using Vignette = UnityEngine.Rendering.Universal.Vignette;
 
     public class SimpleDamaged : MonoBehaviour
     {
-        
+
+    private void Start()
+    {
+        GameManagerScript.instance.simpleDamagedPlayer = this;
+
+        /*   if (volume != null && volume.profile.TryGet<Vignette>(out vignette))
+           {
+               // 성공적으로 가져왔다면 초기 강도 0으로 설정
+               vignette.intensity.value = 0f;
+           }*/
+    }
+
         public Volume volume;
         private Vignette vignette;
 
-        public void TakeDamage(float damage, GameObject damager)
+        public void TakeDamage(DamageInfo damageInfo)
         {
-            GameManagerScript.instance.currentHp -= damage;
+        float finalDamage = CalculateDamage(damageInfo);
+
+        GameManagerScript.instance.currentHp -= finalDamage;
         StartCoroutine(GameManagerScript.instance.uiManager.HpRefresh());
-            Debug.Log("데미지 입음");
-            //  tunnelingVignetteController.defaultParameters.apertureSize
-           
-            if (GameManagerScript.instance.currentHp <= 0)
-            { 
-                Debug.Log("플레이어 사망"); 
-                //사망 카메라 애니메이션 및 사우드과 블러효과 + 리트라이 UI오픈
-            }
-               
 
+        if (GameManagerScript.instance.currentHp <= 0)
+            Debug.Log("플레이어 사망");           
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Awake()
+    float CalculateDamage(DamageInfo info)
+    {
+        float damage = info.amount;
+
+        // 방어구 적용
+        float armor = GameManagerScript.instance.currentArmor;
+
+        if (info.type == DamageType.Physical)
         {
+            damage -= armor;
         }
 
-        private void Start()
-        {
-            GameManagerScript.instance.simpleDamagedPlayer = this;
+        return Mathf.Max(damage, 1f); // 최소 데미지
+    }
 
-         /*   if (volume != null && volume.profile.TryGet<Vignette>(out vignette))
-            {
-                // 성공적으로 가져왔다면 초기 강도 0으로 설정
-                vignette.intensity.value = 0f;
-            }*/
-        }
-        // Update is called once per frame
+   
+
         void Update()
         {
           //  CustomUpdateVignette();

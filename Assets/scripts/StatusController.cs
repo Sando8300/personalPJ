@@ -11,6 +11,17 @@ public class StatusController : MonoBehaviour
         gameManagerScript = GetComponent<GameManagerScript>();
     }
 
+   public  void    AddDefenseBuff(int amount, float duration, bool forever)
+    {
+        
+    }
+
+
+
+
+
+
+
     // 외부(아이템 효과 등)에서 이 함수를 부름
     public void AddHealOverTime(int totalAmount, float duration)
     {

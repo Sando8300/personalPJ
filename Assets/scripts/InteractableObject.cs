@@ -11,9 +11,9 @@ public class InteractableObject : MonoBehaviour
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {if(interactableScript.interactBase.interactorType == InteractorType.loot)
         itemData = randomSet[Random.Range(0, randomSet.Length)];
-        icon = interactableScript.interactBase.icon;
+      icon = interactableScript.interactBase.icon;
         
     }
 

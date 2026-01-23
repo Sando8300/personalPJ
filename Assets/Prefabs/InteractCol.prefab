@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3917167256076108303}
   - component: {fileID: 8958627020755363188}
   - component: {fileID: 3300674778033635509}
+  - component: {fileID: 7882915656307583322}
   m_Layer: 8
   m_Name: InteractCol
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6874022351036416802}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.619999, y: 0.03299904, z: 1.1199989}
   m_LocalScale: {x: 2.81, y: 2.81, z: 2.81}
   m_ConstrainProportionsScale: 1
@@ -69,3 +70,25 @@ MonoBehaviour:
   interactUI: {fileID: 0}
   openL: {fileID: 0}
   openR: {fileID: 0}
+  sounds:
+  - {fileID: 8300000, guid: 6a448a467b8b5154f9b86a60e70942cb, type: 3}
+  source: {fileID: 0}
+--- !u!114 &7882915656307583322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874022351036416802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a9ac07b76187f488443bdd7ab4f533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractableObject
+  interactableScript: {fileID: 11400000, guid: a4f2aae3d2c2c0b409596c6640a87643, type: 2}
+  itemData: {fileID: 0}
+  randomSet:
+  - {fileID: 0}
+  animName: 
+  icon: {fileID: 0}
+  isLoot: 0

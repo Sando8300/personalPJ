@@ -13,7 +13,7 @@ public class OpenInteractScript : MonoBehaviour
     public AudioSource source;
     private void Start()
     {
-
+        
         interactUI.color = GameManagerScript.instance.uiManager.cOFF;
     }
 
@@ -30,6 +30,7 @@ public class OpenInteractScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            source = other.GetComponent<AudioSource>();
             interactUI.sprite = GetComponent<InteractableObject>().icon;
             interactUI.color = GameManagerScript.instance.uiManager.cON; ;
             
@@ -53,6 +54,7 @@ public class OpenInteractScript : MonoBehaviour
 
     void Interact()
     {
+        
         if (!open)
         {
             openL.Play("AutoOpenConLeft");

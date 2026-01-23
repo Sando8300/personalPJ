@@ -66,4 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9335acaf73e9345ba94c4335c90ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DropBoxScript
-  itemBox: []
+  itemBox:
+  - {fileID: 11400000, guid: 11fe5a4561962c84f8bf7b01a7301f40, type: 2}
+  getAll: 0
